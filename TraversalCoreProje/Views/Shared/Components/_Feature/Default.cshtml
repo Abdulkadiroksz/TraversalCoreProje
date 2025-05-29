@@ -1,0 +1,66 @@
+﻿@using EntityLayer.Concrete
+@model List<Feature>
+
+@{
+    // ID'si 1 olan özel öğeyi al
+    var specialFeature = Model.FirstOrDefault(x => x.FeatureID == 1);
+}
+
+<div class="best-rooms py-5">
+    <div class="container py-md-5">
+        <div class="ban-content-inf row">
+
+            <!-- Büyük Resim Alanı (Özel ID'li Feature) -->
+            <div class="col-lg-6 mb-4">
+                <div class="maghny-grid">
+                    <figure class="effect-lily border-radius m-0">
+                        @if (specialFeature != null)
+                        {
+                            <img class="img-fluid w-100" src="@specialFeature.Post1Image" alt="@specialFeature.Post1Name" />
+                            <figcaption>
+                                <div>
+                                    <h4>@specialFeature.Post1Name</h4>
+                                    <p>@specialFeature.Post1Description</p>
+                                </div>
+                            </figcaption>
+                        }
+                        else
+                        {
+                            <!-- Eğer özel veri yoksa varsayılan görsel ve metin -->
+                            <img class="img-fluid w-100" src="~/Traversal-Starter/assets/images/g10.jpg" alt="Default Image" />
+                            <figcaption>
+                                <div>
+                                    <h4>Default Title</h4>
+                                    <p>From 1720$</p>
+                                </div>
+                            </figcaption>
+                        }
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Diğer Öğeler (ID'si 1 olmayanlar) -->
+            <div class="col-lg-6">
+                <div class="row">
+                    @foreach (var item in Model.Where(x => x.FeatureID != 1))
+                    {
+                        <div class="col-md-6 mb-4">
+                            <div class="maghny-grid">
+                                <figure class="effect-lily border-radius">
+                                    <img class="img-fluid w-100" src="@item.Post1Image" alt="@item.Post1Name" />
+                                    <figcaption>
+                                        <div>
+                                            <h4>@item.Post1Name</h4>
+                                            <p>@item.Post1Description</p>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
